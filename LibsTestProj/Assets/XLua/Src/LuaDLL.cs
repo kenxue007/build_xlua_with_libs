@@ -452,6 +452,9 @@ namespace XLua.LuaDLL
         public static extern int luaopen_socket_core(IntPtr L);//[,,m]
 #endif
 
+	    [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
+	    public static extern int luaopen_pb(IntPtr L);//[,,m]
+
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern void lua_pushint64(IntPtr L, long n);//[,,m]
 
