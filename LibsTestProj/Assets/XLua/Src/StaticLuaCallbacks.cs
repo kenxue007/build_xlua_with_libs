@@ -642,6 +642,12 @@ namespace XLua
 #endif
 
         [MonoPInvokeCallback(typeof(LuaCSFunction))]
+        internal static int LoadPB(RealStatePtr L)
+        {
+            return LuaAPI.luaopen_pb(L);
+        }
+
+        [MonoPInvokeCallback(typeof(LuaCSFunction))]
         internal static int LoadCS(RealStatePtr L)
         {
             LuaAPI.xlua_pushasciistring(L, LuaEnv.CSHARP_NAMESPACE);

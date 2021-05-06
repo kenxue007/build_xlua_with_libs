@@ -25,6 +25,7 @@ option ( USING_LUAJIT "using luajit" OFF )
 option ( GC64 "using gc64" OFF )
 option ( LUAC_COMPATIBLE_FORMAT "compatible format" OFF )
 option ( PBC "using pbc" OFF )
+option ( PBLUA "using pblua" OFF )
 
 find_path(XLUA_PROJECT_DIR NAMES SConstruct
     PATHS 
@@ -53,7 +54,21 @@ list(APPEND THIRDPART_INC  lua-rapidjson/include)
 set (THIRDPART_SRC ${THIRDPART_SRC} ${RAPIDJSON_SRC})
 #end lua-rapidjson
 
-if (NOT PBC)
+if (PBLUA)
+	#begin pb-lua
+	set (LPB_SRC 
+		protobuf-gen-lua/pb.c
+	)
+	set_property(
+		SOURCE ${LPB_SRC}
+		APPEND
+		PROPERTY COMPILE_DEFINITIONS
+		LUA_LIB
+	)
+	list(APPEND THIRDPART_INC lua-protobuf)
+	set (THIRDPART_SRC ${THIRDPART_SRC} ${LPB_SRC})
+	#end pb-lua
+elseif (NOT PBC)
 	#begin lua-profobuf
 	set (LPB_SRC 
 		lua-protobuf/pb.c
